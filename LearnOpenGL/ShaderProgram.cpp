@@ -43,6 +43,46 @@ void ShaderProgram::use()
     glUseProgram(m_ShaderProgram);
 }
 
+void ShaderProgram::setInt(const std::string& name, int value)
+{
+    glUniform1i(getUniformLocation(name), value);
+}
+
+void ShaderProgram::setFloat(const std::string& name, float value)
+{
+    glUniform1f(getUniformLocation(name), value);
+}
+
+void ShaderProgram::setVec2(const std::string& name, const glm::vec2& value)
+{
+    glUniform2fv(getUniformLocation(name), 1, glm::value_ptr(value));
+}
+
+void ShaderProgram::setVec3(const std::string& name, const glm::vec3& value)
+{
+    glUniform3fv(getUniformLocation(name), 1, glm::value_ptr(value));
+}
+
+void ShaderProgram::setVec4(const std::string& name, const glm::vec4& value)
+{
+    glUniform4fv(getUniformLocation(name), 1, glm::value_ptr(value));
+}
+
+void ShaderProgram::setMat3(const std::string& name, const glm::mat3& value)
+{
+    glUniformMatrix3fv(getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(value));
+}
+
+void ShaderProgram::setMat4(const std::string& name, const glm::mat4& value)
+{
+    glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(value));
+}
+
+void ShaderProgram::setBool(const std::string& name, bool value)
+{
+    glUniform1i(getUniformLocation(name), (int) value);
+}
+
 std::string ShaderProgram::loadShader(const std::string& path)
 {
 	std::ifstream file(path);
@@ -75,4 +115,20 @@ unsigned int ShaderProgram::compileShader(unsigned int type, const std::string& 
         std::cerr << "ERROR::SHADER::COMPILATION_FAILED: " << infoLog << std::endl;
     }
     return shader;
+}
+
+int ShaderProgram::getUniformLocation(const std::string& name)
+{
+    auto it = m_UniformCache.find(name);
+    if (it != m_UniformCache.end())
+        return it->second;
+
+    int location = glGetUniformLocation(m_ShaderProgram, name.c_str());
+    if (location == -1)
+        std::cerr << "WARNING::SHADER: Uniform " << name << " not found\n";
+
+    m_UniformCache[name] = location;
+    return location;
+
+    return 0;
 }
