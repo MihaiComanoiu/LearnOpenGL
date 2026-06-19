@@ -75,6 +75,20 @@ void Window::run()
         1, 3, 2
     };
 
+    float texCoords[] = {
+        0.0f, 0.0f, // lower left
+        1.0f, 0.0f, // lower right corner
+        0.5f, 1.0f // top-center corner
+    };
+
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
     unsigned int EBO;
     glGenBuffers(1, &EBO);
 
