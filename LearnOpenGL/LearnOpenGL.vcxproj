@@ -155,7 +155,7 @@
     <None Include="shaders\vertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\textures\blue_wall.png" />
+    <Image Include="res\textures\terrain.png" />
     <Image Include="res\textures\wood.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

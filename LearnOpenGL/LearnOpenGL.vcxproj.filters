@@ -47,10 +47,10 @@
     <None Include="shaders\fragmentShader.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\textures\blue_wall.png">
+    <Image Include="res\textures\wood.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\textures\wood.png">
+    <Image Include="res\textures\terrain.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
